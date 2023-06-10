@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { Toaster, toast } from "react-hot-toast";
 
@@ -16,6 +17,7 @@ const postBlog = async (title: string, description: string) => {
 };
 
 const AddBlog = () => {
+  const router = useRouter();
   const titleRef = useRef<HTMLInputElement | null>(null);
   const descriptionRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -25,6 +27,7 @@ const AddBlog = () => {
       toast.loading("Adding Blog...📩", { id: "1" });
       await postBlog(titleRef.current?.value, descriptionRef.current?.value);
       toast.success("Blog Added! 🎉", { id: "1" });
+      router.push("/");
     }
   };
   return (
